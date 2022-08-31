@@ -47,20 +47,3 @@ export const ProductCardContainerPrice = styled.span`
    width: 10%;
 `
 
-// .product-card-container {
-
-
-
-//     }
-
-//     .footer {
-
-
-//         .name {
-
-//         }
-
-//         .price {
-//         }
-//     }
-// }

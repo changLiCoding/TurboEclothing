@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
     const { addItemToCart, cartItems } = useContext(CartContext);
 
     const addProductToCart = () => {
-        console.log(cartItems);
+        // console.log(cartItems);
         // console.log(CartContext);
         return (addItemToCart(product))
     };

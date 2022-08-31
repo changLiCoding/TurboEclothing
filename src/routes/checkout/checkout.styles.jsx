@@ -30,18 +30,3 @@ export const CheckoutContainer = styled.div`
 
 
 
-// .checkout-container {
-
-
-//     .checkout-header {
-
-
-//         .header-block {
- 
-//         }
-//     }
-
-//     .total {
-
-//     }
-// }

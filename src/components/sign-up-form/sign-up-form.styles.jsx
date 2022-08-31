@@ -10,6 +10,3 @@ export const SignUpContainer = styled.div`
 }
 `
 
-// .sign - up - container {
-
-// }
