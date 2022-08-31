@@ -7,9 +7,9 @@ import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "
 // import { UserContext } from "../../contexts/user.context";
 
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
-import './sign-up-form.styles.scss'
+import { SignUpContainer } from './sign-up-form.styles.jsx'
 
 const SignUpForm = () => {
     const [formFields, setFormFields] = useState({ displayName: '', email: '', password: '', confirmPassword: '' });
@@ -49,7 +49,7 @@ const SignUpForm = () => {
     };
 
     return (
-        <div className="sign-up-container">
+        <SignUpContainer>
             <h2>Don't have an account? </h2>
             <span>Sign Up with Your Email and Password. </span>
             <form onSubmit={handleSubmit}>
@@ -58,9 +58,9 @@ const SignUpForm = () => {
                 <FormInput label="Email" type="email" required onChange={handleChange} name="email" value={email} />
                 <FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password} />
                 <FormInput label="Confirm Password" type="password" required onChange={handleChange} name="confirmPassword" value={confirmPassword} />
-                <Button type="submit">Sign Up</Button>
+                <Button buttonType={BUTTON_TYPE_CLASSES.base} type="submit">Sign Up</Button>
             </form>
-        </div>
+        </SignUpContainer>
     )
 }
 

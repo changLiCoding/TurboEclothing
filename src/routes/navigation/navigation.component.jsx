@@ -8,7 +8,7 @@ import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 
 import { ReactComponent as CrownLogo } from '../../assets/crown.svg';
-import './navigation.styles.scss';
+import { NavigationContainer, LogoContainer, NavLinks, NavLink } from './navigation.styles';
 import { signOutUser } from '../../utils/firebase/firebase.utils'
 
 const Navigation = () => {
@@ -26,21 +26,21 @@ const Navigation = () => {
 
     return (
         <Fragment>
-            <div className='navigation'>
-                <Link className='logo-container' to='/'>
+            <NavigationContainer>
+                <LogoContainer to='/'>
                     <CrownLogo className='logo' />
-                </Link>
-                <div className='nav-links-container'>
-                    <Link className='nav-link' to='/contact'>CONTACT</Link>
-                    <Link className='nav-link' to='/shop'>SHOP</Link>
+                </LogoContainer>
+                <NavLinks>
+                    <NavLink to='/contact'>CONTACT</NavLink>
+                    <NavLink to='/shop'>SHOP</NavLink>
                     {
-                        currentUser ? (<span onClick={signOutUser} className='nav-link'>SIGN OUT</span>) : (<Link className='nav-link' to='/auth'>SIGN IN</Link>
+                        currentUser ? (<NavLink as='span' onClick={signOutUser}>SIGN OUT</NavLink>) : (<NavLink to='/auth'>SIGN IN</NavLink>
                         )
                     }
                     <CartIcon />
-                </div>
+                </NavLinks>
                 {isCartOpen && <CartDropdown />}
-            </div>
+            </NavigationContainer>
             <Outlet />
 
         </Fragment>)

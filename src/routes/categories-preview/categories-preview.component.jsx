@@ -8,7 +8,7 @@ const CategoriesPreview = () => {
     const { categoriesMap } = useContext(CategoriesContext);
     // console.log(categoriesMap);
     return (
-        <div className="category-preview-container">
+        <Fragment>
             {Object.keys(categoriesMap).map((title) => {
                 const products = categoriesMap[title];
                 {/* console.log(products); */ }
@@ -16,7 +16,7 @@ const CategoriesPreview = () => {
                     <CategoryPreview key={title} title={title} products={products} />
                 )
             })}
-        </div>
+        </Fragment>
     );
 };
 
