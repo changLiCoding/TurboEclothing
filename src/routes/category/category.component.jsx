@@ -3,20 +3,23 @@ import {
     useState, useEffect, Fragment
 } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import ProductCard from '../../components/product-card/product-card.component';
+import Spinner from '../../components/spinner/spinner.component';
 
 // import { CategoriesContext } from '../../contexts/categories.context';
-import { useSelector } from 'react-redux';
-import { selectCategoriesMap } from '../../store/categories/category.selector';
+
+import { selectCategoriesMap, selectIsCagegoriesIsLoading } from '../../store/categories/category.selector';
 
 import { CategoryContainer, CategoryTitle } from './category.styles.jsx'
-
 
 
 const Category = () => {
     const { category } = useParams();
     // const { categoriesMap } = useContext(CategoriesContext);
     const categoriesMap = useSelector(selectCategoriesMap);
+    const isLoading = useSelector(selectIsCagegoriesIsLoading);
     const [products, setProducts] = useState(categoriesMap[category]);
     useEffect(() => {
         setProducts(categoriesMap[category]);
@@ -26,14 +29,22 @@ const Category = () => {
     return (
         <Fragment>
             <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
+            {
+                /* Check if the page is loading */
+                isLoading ? <Spinner /> : <CategoryContainer>
+                    {/* safe gard make sure products have value */}
+                    {products && products.map((product) =>
+                        (<ProductCard product={product} key={product.id} />))}
+                </CategoryContainer>
+            }
 
-            <CategoryContainer>
-                {/* safe gard make sure products have value */}
-                {products && products.map((product) =>
-                    (<ProductCard product={product} key={product.id} />))}
-            </CategoryContainer>
+
+
         </Fragment>
     )
 }
 
 export default Category;
+
+
+
