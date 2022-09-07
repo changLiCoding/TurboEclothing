@@ -2,7 +2,10 @@ import {
     useState,
     // useContext
 } from "react";
+import { useDispatch } from "react-redux";
+
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
+import { signUpStart } from "../../store/user/user.action";
 
 // import { UserContext } from "../../contexts/user.context";
 
@@ -12,6 +15,7 @@ import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { SignUpContainer } from './sign-up-form.styles.jsx'
 
 const SignUpForm = () => {
+    const dispatch = useDispatch();
     const [formFields, setFormFields] = useState({ displayName: '', email: '', password: '', confirmPassword: '' });
     const { displayName, email, password, confirmPassword } = formFields;
     // const { setCurrentUser } = useContext(UserContext);
@@ -24,11 +28,12 @@ const SignUpForm = () => {
             return;
         }
         try {
-            const { user } = await createAuthUserWithEmailAndPassword(email, password);
+            // const { user } = await createAuthUserWithEmailAndPassword(email, password); CHANGED_FROM_THUNK_TO_REDUX_SAGA
             // console.log({ user });
             // console.log(formFields);
             // setCurrentUser(user)
-            await createUserDocumentFromAuth(user, { displayName });
+            // await createUserDocumentFromAuth(user, { displayName });   CHANGED_FROM_THUNK_TO_REDUX_SAGA
+            dispatch(signUpStart(email, password, displayName));
             setFormFields({ displayName: '', email: '', password: '', confirmPassword: '' })
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
