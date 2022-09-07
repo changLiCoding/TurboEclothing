@@ -2,16 +2,18 @@ import {
     useState,
     // useContext 
 } from 'react';
+import { useDispatch } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 // import { UserContext } from '../../contexts/user.context';
 import {
-    signInWithGooglePopup,
-    createUserDocumentFromAuth,
-    signInAuthUserWithEmailAndPassword,
+    // signInWithGooglePopup,
+    // createUserDocumentFromAuth, CHANGED_FROM_THUNK_TO_REDUX_SAGA
+    // signInAuthUserWithEmailAndPassword,
 } from '../../utils/firebase/firebase.utils.js';
+import { googleSignInStart, emailSignInStart } from '../../store/user/user.action';
 
 import { ButtonsContainer, SignInContainer } from './sign-in-form.styles';
 
@@ -21,6 +23,7 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+    const dispatch = useDispatch();
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
@@ -31,20 +34,21 @@ const SignInForm = () => {
     };
 
     const signInWithGoogle = async () => {
-        await signInWithGooglePopup();
+        dispatch(googleSignInStart());
+        // await signInWithGooglePopup();
         // setCurrentUser(user);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         try {
-            const { user } = await signInAuthUserWithEmailAndPassword(
-                email,
-                password
-            );
+            // const { user } = await signInAuthUserWithEmailAndPassword(
+            //     email,
+            //     password
+            // );
             // console.log({ user });
             // setCurrentUser(user);
+            dispatch(emailSignInStart(email, password));
             resetFormFields();
         } catch (error) {
             switch (error.code) {

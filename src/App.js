@@ -7,10 +7,14 @@ import Authentication from './routes/authentication/authentication.component';
 import Shop from './routes/shop/shop.component';
 import Checkout from './routes/checkout/checkout.component';
 import Home from './routes/home/home.component';
-import { setCurrentUser } from './store/user/user.action';
+// import { setCurrentUser } from './store/user/user.action'; CHANGED_REDUCER_TO_REDUX_SAGA
+import { checkUserSession } from './store/user/user.action';
 
-
-import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/firebase/firebase.utils';
+import {
+  // onAuthStateChangedListener, CHANGED_REDUCER_TO_REDUX_SAGA
+  // createUserDocumentFromAuth, CHANGED_REDUCER_TO_REDUX_SAGA
+  // getCurrentUser CHANGED_TO_CHECKUSERSESSION_FROM_SAGA
+} from './utils/firebase/firebase.utils';
 
 // const Shop = () => {
 //   return (<div><h1>I am the Shop Page!</h1></div>)
@@ -19,14 +23,7 @@ import { onAuthStateChangedListener, createUserDocumentFromAuth } from './utils/
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const unsubcribe = onAuthStateChangedListener((user) => {
-      // console.log(user);
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
-      dispatch(setCurrentUser(user));
-    })
-    return unsubcribe;
+    dispatch(checkUserSession());
   }, [dispatch]);
 
   return (

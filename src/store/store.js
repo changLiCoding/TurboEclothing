@@ -7,7 +7,7 @@ import createSagaMiddleware from '@redux-saga/core';
 import { rootSaga } from './root-saga';
 
 import logger from 'redux-logger';
-import { loggerMiddleware } from '../middleware/logger';
+// import { loggerMiddleware } from '../middleware/logger'; CUSTOMIZED_VERSION_MIDDLEWARE
 import { rootReducer } from './root-reducer';
 
 
