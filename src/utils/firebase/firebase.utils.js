@@ -114,7 +114,6 @@ export const getCurrentUser = () => {
       (userAuth) => {
         unsubcribe();
         resolve(userAuth);
-        console.log('resolved');
       },
       reject
     );
