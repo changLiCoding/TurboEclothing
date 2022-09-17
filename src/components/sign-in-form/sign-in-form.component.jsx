@@ -12,7 +12,7 @@ import {
     // signInWithGooglePopup,
     // createUserDocumentFromAuth, CHANGED_FROM_THUNK_TO_REDUX_SAGA
     // signInAuthUserWithEmailAndPassword,
-} from '../../utils/firebase/firebase.utils.js';
+} from '../../utils/firebase/firebase.utils';
 import { googleSignInStart, emailSignInStart } from '../../store/user/user.action';
 
 import { ButtonsContainer, SignInContainer } from './sign-in-form.styles';
