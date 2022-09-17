@@ -1,6 +1,7 @@
 import { createAction, withMatcher, Action, ActionwithPayload } from "../../utils/reducer/reducer.utils";
 import { USER_ACTION_TYPES } from "./user.types";
 import { AdditionalInformation, UserData } from "../../utils/firebase/firebase.utils";
+import { User } from "firebase/auth";
 
 
 export type CheckUserSession = Action<USER_ACTION_TYPES.CHECK_USER_SESSION>;
@@ -10,7 +11,7 @@ export type EmailSignInStart = ActionwithPayload<USER_ACTION_TYPES.EMAIL_SIGN_IN
 export type SignInSuccess = ActionwithPayload<USER_ACTION_TYPES.SIGN_IN_SUCCESS, UserData>
 export type SignInFailed = ActionwithPayload<USER_ACTION_TYPES.SIGN_IN_FAILED, Error>
 export type SignUpStart = ActionwithPayload<USER_ACTION_TYPES.SIGN_UP_START, { email: string; password: string; displayName: string }>;
-export type SignUpSuccess = ActionwithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS, { user: UserData; additionalDetails: AdditionalInformation }>;
+export type SignUpSuccess = ActionwithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS, { user: User; additionalDetails: AdditionalInformation }>;
 export type SignUpFailed = ActionwithPayload<USER_ACTION_TYPES.SIGN_UP_FAILED, Error>;
 export type SignOutStart = Action<USER_ACTION_TYPES.SIGN_OUT_START>;
 export type SignOutSuccess = Action<USER_ACTION_TYPES.SIGN_OUT_SUCCESS>;
@@ -28,7 +29,7 @@ export const googleSignInStart = withMatcher((): GoogleSignInStart =>
 export const emailSignInStart = withMatcher((email: string, password: string): EmailSignInStart =>
   createAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, { email, password }));
 
-export const signInSuccess = withMatcher((user: UserData) =>
+export const signInSuccess = withMatcher((user: UserData & { id: string }) =>
   createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user));
 
 export const signInFailed = withMatcher((error: Error): SignInFailed =>
@@ -38,7 +39,7 @@ export const signUpStart = withMatcher((email: string, password: string, display
   createAction(USER_ACTION_TYPES.SIGN_UP_START, { email, password, displayName }));
 
 // Had a typo with additionalDetails may have potential issue!
-export const signUpSuccess = withMatcher((user: UserData, additionalDetails: AdditionalInformation): SignUpSuccess =>
+export const signUpSuccess = withMatcher((user: User, additionalDetails: AdditionalInformation): SignUpSuccess =>
   createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, { user, additionalDetails }));
 
 export const signUpFailed = withMatcher((error: Error): SignUpFailed =>
