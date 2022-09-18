@@ -9,7 +9,7 @@ import { setIsCartOpen } from '../../store/cart/cart.action';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import CartItem from '../cart-item/cart-item.component';
 
-import { CartDropdownContainer, EmptyMessage, CartItemsContainer } from './cart-dropdown.styles.jsx';
+import { CartDropdownContainer, EmptyMessage, CartItemsContainer } from './cart-dropdown.styles';
 
 const CartDropdown = () => {
     const navigate = useNavigate();

@@ -18,7 +18,6 @@ type CategoryRouteParams = {
     category: string;
 }
 
-
 const Category = () => {
     const { category } = useParams<keyof CategoryRouteParams>() as CategoryRouteParams;
     // const { categoriesMap } = useContext(CategoriesContext);

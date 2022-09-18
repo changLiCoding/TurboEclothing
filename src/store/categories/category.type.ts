@@ -11,7 +11,6 @@ export type CategoryItem = {
   price: number;
 }
 
-
 export type Category = {
   title: string;
   imageUrl: string;
